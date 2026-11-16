@@ -2,7 +2,7 @@
 
 
 
-\*\*An Assistive Learning Platform for Students with Dyslexia and Dysgraphia\*\*
+**An Assistive Learning Platform for Students with Dyslexia and Dysgraphia**
 
 
 
@@ -14,7 +14,7 @@ Although the platform focuses on students with learning difficulties, it is also
 
 
 
-\## 🎯 Project Objective
+## 🎯 Project Objective
 
 
 
@@ -24,79 +24,79 @@ The main objective of DissAssist is to make learning more accessible, interactiv
 
 The platform aims to:
 
-\- Support students with Dyslexia and Dysgraphia.
+- Support students with Dyslexia and Dysgraphia.
 
-\- Improve reading and writing practice.
+- Improve reading and writing practice.
 
-\- Provide interactive spelling and grammar assistance.
+- Provide interactive spelling and grammar assistance.
 
-\- Encourage independent learning through accessible tools.
+- Encourage independent learning through accessible tools.
 
-\- Support children and general learners through skill-based practice.
-
-
-
-\## ✨ Key Features
+- Support children and general learners through skill-based practice.
 
 
 
-\### 1. Reading Assistance
-
-\- Reading practice and learning activities.
-
-\- Support for improving reading skills.
+## ✨ Key Features
 
 
 
-\### 2. Handwriting Assistance
+### 1. Reading Assistance
 
-\- Interactive handwriting practice.
+- Reading practice and learning activities.
 
-\- Handwriting analysis and feedback.
-
-\- Stroke-based assessment and recognition support.
+- Support for improving reading skills.
 
 
 
-\### 3. Spelling and Grammar Assistance
+### 2. Handwriting Assistance
 
-\- Spelling checker.
+- Interactive handwriting practice.
 
-\- Grammar checking and suggestions.
+- Handwriting analysis and feedback.
 
-\- Language improvement support.
-
-
-
-\### 4. Speech Assistance
-
-\- Speech practice activities.
-
-\- Speech-to-text and text-to-speech support.
+- Stroke-based assessment and recognition support.
 
 
 
-\### 5. Learning Dashboard
+### 3. Spelling and Grammar Assistance
 
-\- Student dashboard.
+- Spelling checker.
 
-\- Guardian dashboard.
+- Grammar checking and suggestions.
 
-\- Student management and profile features.
-
-
-
-\### 6. Accessibility Support
-
-\- Accessibility-focused interface.
-
-\- Interactive learning experience.
-
-\- Tools designed to support different learning needs.
+- Language improvement support.
 
 
 
-\## 🛠️ Technology Stack
+### 4. Speech Assistance
+
+- Speech practice activities.
+
+- Speech-to-text and text-to-speech support.
+
+
+
+### 5. Learning Dashboard
+
+- Student dashboard.
+
+- Guardian dashboard.
+
+- Student management and profile features.
+
+
+
+### 6. Accessibility Support
+
+- Accessibility-focused interface.
+
+- Interactive learning experience.
+
+- Tools designed to support different learning needs.
+
+
+
+## 🛠️ Technology Stack
 
 
 
@@ -118,7 +118,7 @@ The platform aims to:
 
 
 
-\## 📂 Project Structure
+## 📂 Project Structure
 
 
 
@@ -172,23 +172,23 @@ DissAssist/
 
 
 
-\## ⚙️ Installation and Setup
+## ⚙️ Installation and Setup
 
 
 
-\### Prerequisites
+### Prerequisites
 
 
 
-\- Python 3.10 or later
+- Python 3.10 or later
 
-\- Git
+- Git
 
-\- pip (Python package manager)
+- pip (Python package manager)
 
 
 
-\### Step 1: Clone the Repository
+### Step 1: Clone the Repository
 
 
 
@@ -200,7 +200,7 @@ git clone https://github.com/gokulhari-r/DissAssist.git
 
 
 
-\### Step 2: Navigate to the Project Folder
+### Step 2: Navigate to the Project Folder
 
 
 
@@ -212,7 +212,7 @@ cd DissAssist
 
 
 
-\### Step 3: Create a Virtual Environment
+### Step 3: Create a Virtual Environment
 
 
 
@@ -224,11 +224,11 @@ python -m venv venv
 
 
 
-\### Step 4: Activate the Virtual Environment
+### Step 4: Activate the Virtual Environment
 
 
 
-\*\*Windows:\*\*
+**Windows:**
 
 
 
@@ -240,7 +240,7 @@ venv\\Scripts\\activate
 
 
 
-\### Step 5: Install Dependencies
+### Step 5: Install Dependencies
 
 
 
@@ -252,7 +252,7 @@ pip install -r requirements.txt
 
 
 
-\### Step 6: Run the Application
+### Step 6: Run the Application
 
 
 
@@ -268,7 +268,7 @@ Open the local URL displayed in your terminal to access the application.
 
 
 
-\## 🔐 Configuration
+## 🔐 Configuration
 
 
 
@@ -284,69 +284,69 @@ Never commit private credentials or production secrets to GitHub.
 
 
 
-\## 🌱 Future Enhancements
+## 🌱 Future Enhancements
 
 
 
-\- Advanced AI-powered personalized learning assistance.
+- Advanced AI-powered personalized learning assistance.
 
-\- Improved handwriting recognition and analysis.
+- Improved handwriting recognition and analysis.
 
-\- Personalized learning recommendations.
+- Personalized learning recommendations.
 
-\- More interactive educational activities.
+- More interactive educational activities.
 
-\- Enhanced accessibility features.
+- Enhanced accessibility features.
 
-\- Progress tracking and learning analytics.
-
-
-
-\## 👥 Target Users
+- Progress tracking and learning analytics.
 
 
 
-\- Students with Dyslexia.
-
-\- Students with Dysgraphia.
-
-\- Children developing reading and writing skills.
-
-\- Teachers and guardians.
-
-\- General learners seeking additional learning support.
+## 👥 Target Users
 
 
 
-\## 📌 Project Information
+- Students with Dyslexia.
+
+- Students with Dysgraphia.
+
+- Children developing reading and writing skills.
+
+- Teachers and guardians.
+
+- General learners seeking additional learning support.
 
 
 
-\*\*Project Name:\*\* DissAssist
+## 📌 Project Information
 
 
 
-\*\*Project Category:\*\* Assistive Technology / EdTech
+**Project Name:** DissAssist
 
 
 
-\*\*Primary Focus:\*\* Inclusive Learning Assistance
+**Project Category:** Assistive Technology / EdTech
 
 
 
-\*\*Developer:\*\* Gokulhari Rajkumar
+**Primary Focus:** Inclusive Learning Assistance
 
 
 
-\*\*GitHub Repository:\*\* https://github.com/gokulhari-r/DissAssist
+**Developer:** Gokulhari Rajkumar
 
 
 
-\---
+**GitHub Repository:** https://github.com/gokulhari-r/DissAssist
 
 
 
-\*DissAssist aims to make learning more accessible, inclusive, and supportive for everyone.\*
+---
+
+
+
+*DissAssist aims to make learning more accessible, inclusive, and supportive for everyone.*
 
 
 
