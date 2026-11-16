@@ -98,22 +98,14 @@ The platform aims to:
 
 ## 🛠️ Technology Stack
 
-
-
 | Category | Technologies |
-
 |---|---|
-
 | Backend | Python, Flask |
-
 | Frontend | HTML, CSS, JavaScript |
-
 | Database | SQLite, Flask-SQLAlchemy |
-
 | Image Processing | Pillow, NumPy |
-
-| Spelling \& Grammar | PySpellChecker, LanguageTool API |
-
+| Spell Checking | PySpellChecker |
+| Grammar Checking | LanguageTool API |
 | Speech Features | Browser Speech APIs |
 
 
