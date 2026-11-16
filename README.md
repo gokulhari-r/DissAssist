@@ -101,21 +101,13 @@ The platform aims to:
 
 
 | Category | Technologies |
-
 |---|---|
-
 | Backend | Python, Flask |
-
 | Frontend | HTML, CSS, JavaScript |
-
 | Database | SQLite, Flask-SQLAlchemy |
-
 | Image Processing | Pillow, NumPy |
-
 | Spell Checking | PySpellChecker |
-
 | Grammar Checking | LanguageTool API |
-
 | Speech Features | Browser Speech APIs |
 
 
