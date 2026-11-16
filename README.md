@@ -1,4 +1,4 @@
-\# DissAssist – Inclusive Learning Assistance Platform
+# DissAssist – Inclusive Learning Assistance Platform
 
 
 
