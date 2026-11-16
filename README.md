@@ -350,5 +350,5 @@ Never commit private credentials or production secrets to GitHub.
 
 
 
-\*\*Learning without barriers. Growing without limits.\*\*
+**Learning without barriers. Growing without limits.**
 
