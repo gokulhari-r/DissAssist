@@ -1,0 +1,15 @@
+Flask==3.0.3
+Flask-SQLAlchemy==3.1.1
+Flask-Login==0.6.3
+Werkzeug==3.0.3
+requests==2.32.3
+pyspellchecker==0.8.1
+Pillow==10.4.0
+numpy==1.26.4
+
+# Optional (only needed for real handwriting-letter OCR scoring).
+# If not installed, handwriting feedback automatically falls back to
+# shape/stroke heuristics instead of OCR-based letter recognition.
+# pytesseract==0.3.10
+# (pytesseract also requires the Tesseract-OCR engine to be installed
+#  on your system: https://tesseract-ocr.github.io/tessdoc/Installation.html)

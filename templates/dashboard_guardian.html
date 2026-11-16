@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+{% block title %}My dashboard{% endblock %}
+
+{% block content %}
+<div class="flex justify-between items-center flex-wrap gap-12">
+  <div>
+    <span class="eyebrow">{{ current_user.role|capitalize }} dashboard</span>
+    <h1 class="mt-0">Hi {{ current_user.name.split(' ')[0] }}!</h1>
+  </div>
+  <a class="btn btn-primary" href="{{ url_for('manage_students') }}">Manage students</a>
+</div>
+
+{% if not students %}
+  <div class="card mt-24 empty-state">
+    <h3>No students linked yet</h3>
+    <p class="muted">Link to a student's account to see their progress, strengths, and recommended
+      activities.</p>
+    <a class="btn btn-primary mt-16" href="{{ url_for('manage_students') }}">Link a student</a>
+  </div>
+{% else %}
+  <div class="card-row cols-2 mt-24">
+    {% for s in students %}
+      <div class="card">
+        <div class="flex justify-between items-center">
+          <h3 class="mt-0 mb-0">{{ s.user.name }}</h3>
+          <span class="level-badge">{{ s.profile.reading_level }}</span>
+        </div>
+        <p class="muted" style="font-size:0.9rem;">
+          {{ s.profile.difficulty_type|capitalize }}
+          {% if s.profile.age %} · Age {{ s.profile.age }}{% endif %}
+          {% if s.profile.grade %} · {{ s.profile.grade }}{% endif %}
+        </p>
+
+        <div class="flex items-center gap-12 mt-16">
+          <span class="score-pill">
+            {{ "%.0f"|format(s.avg_score) ~ "%" if s.avg_score is not none else "—" }}
+          </span>
+          <div>
+            <p class="mb-0" style="font-weight:700;">Average recent score</p>
+            {% if s.last_activity %}
+              <p class="muted mb-0" style="font-size:0.85rem;">
+                Last activity: {{ s.last_activity[0].activity_title }} ({{ s.last_activity[0].created_at.strftime("%b %d") }})
+              </p>
+            {% else %}
+              <p class="muted mb-0" style="font-size:0.85rem;">No activity yet</p>
+            {% endif %}
+          </div>
+        </div>
+
+        <a class="btn btn-outline btn-sm mt-16" href="{{ url_for('view_student', student_id=s.user.id) }}">View full progress</a>
+      </div>
+    {% endfor %}
+  </div>
+{% endif %}
+{% endblock %}

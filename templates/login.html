@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block title %}Log in{% endblock %}
+
+{% block content %}
+<div class="card" style="max-width:440px; margin:0 auto;">
+  <span class="eyebrow">Welcome back</span>
+  <h1 class="mt-0">Log in</h1>
+
+  <form method="POST" novalidate>
+    <label for="email">Email</label>
+    <input type="email" id="email" name="email" required autofocus>
+
+    <label for="password">Password</label>
+    <input type="password" id="password" name="password" required>
+
+    <button type="submit" class="btn btn-primary btn-block">Log in</button>
+  </form>
+
+  <p class="mt-16 text-center muted">
+    New here? <a href="{{ url_for('register') }}">Create an account</a>
+  </p>
+</div>
+{% endblock %}

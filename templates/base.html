@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% block title %}LearnBridge{% endblock %} | LearnBridge</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  {% block extra_head %}{% endblock %}
+</head>
+<body data-user-name="{{ current_user.name if current_user.is_authenticated else '' }}">
+
+  <nav class="navbar">
+    <div class="navbar-inner">
+      <a class="brand" href="{{ url_for('index') }}">
+        <span class="brand-mark">LB</span> LearnBridge
+      </a>
+      <div class="nav-links">
+        {% if current_user.is_authenticated %}
+          {% if current_user.is_student %}
+            <a href="{{ url_for('student_dashboard') }}">Dashboard</a>
+            <a href="{{ url_for('reading') }}">Reading</a>
+            {% if current_user.student_profile.has_dysgraphia %}
+              <a href="{{ url_for('handwriting') }}">Handwriting</a>
+            {% endif %}
+            <a href="{{ url_for('speech_practice') }}">Speech</a>
+            <a href="{{ url_for('spelling_checker') }}">Spelling &amp; Grammar</a>
+          {% else %}
+            <a href="{{ url_for('guardian_dashboard') }}">Dashboard</a>
+            <a href="{{ url_for('manage_students') }}">Manage students</a>
+          {% endif %}
+          <a href="{{ url_for('profile') }}">Profile</a>
+          <a href="{{ url_for('logout') }}">Log out</a>
+        {% else %}
+          <a href="{{ url_for('login') }}">Log in</a>
+          <a class="btn btn-primary btn-sm" href="{{ url_for('register') }}">Get started</a>
+        {% endif %}
+      </div>
+    </div>
+  </nav>
+
+  <main class="container" style="padding-top:24px; padding-bottom:40px;">
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        {% for category, message in messages %}
+          <div class="flash flash-{{ category }}" role="status">{{ message }}</div>
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
+
+    {% block content %}{% endblock %}
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      LearnBridge — built to support students with dyslexia and dysgraphia. Not a substitute for
+      professional educational or clinical assessment.
+    </div>
+  </footer>
+
+  <div class="settings-panel">
+    <button id="settings-toggle" class="settings-toggle" aria-label="Accessibility settings" title="Accessibility settings">⚙</button>
+    <div id="settings-flyout" class="settings-flyout">
+      <h4 class="mt-0">Display settings</h4>
+      <label for="pref-font">Font</label>
+      <select id="pref-font">
+        <option value="atkinson">Atkinson Hyperlegible (default)</option>
+        <option value="opendyslexic">OpenDyslexic</option>
+      </select>
+      <label for="pref-size">Text size</label>
+      <input type="range" id="pref-size" min="14" max="28" step="1">
+      <label for="pref-spacing">Line spacing</label>
+      <input type="range" id="pref-spacing" min="1.2" max="2.4" step="0.1">
+      {% if current_user.is_authenticated and current_user.is_student %}
+        <button id="pref-save-server" class="btn btn-outline btn-sm btn-block">Save to my account</button>
+      {% endif %}
+    </div>
+  </div>
+
+  {% if current_user.is_authenticated and current_user.is_student %}
+  <script>
+    window.SERVER_PREFS = {
+      font: {{ current_user.student_profile.preferred_font|tojson }},
+      fontSize: {{ current_user.student_profile.font_size|tojson }},
+      lineSpacing: {{ current_user.student_profile.line_spacing|tojson }}
+    };
+  </script>
+  {% endif %}
+  <script src="{{ url_for('static', filename='js/accessibility.js') }}"></script>
+  {% block extra_scripts %}{% endblock %}
+</body>
+</html>

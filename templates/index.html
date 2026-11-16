@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+{% block title %}Welcome{% endblock %}
+
+{% block content %}
+<section class="hero">
+  <div class="hero-grid">
+    <div>
+      <span class="eyebrow">For students, parents &amp; teachers</span>
+      <h1>A learning space built around how your child actually learns.</h1>
+      <p class="lead">
+        LearnBridge gives students with dyslexia and dysgraphia tools that meet them where they
+        are — text-to-speech, speech-to-text, handwriting feedback, and a spelling &amp; grammar
+        helper — while parents and teachers see real progress, not just grades.
+      </p>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="{{ url_for('register') }}">Create a free account</a>
+        <a class="btn btn-outline" href="{{ url_for('login') }}">I already have an account</a>
+      </div>
+
+      <ul class="feature-list">
+        <li><span class="feature-dot">1</span> <span>Personalised dashboard for every student, parent, and teacher</span></li>
+        <li><span class="feature-dot">2</span> <span>Reading practice with read-aloud and dyslexia-friendly fonts</span></li>
+        <li><span class="feature-dot">3</span> <span>Handwriting tracing with instant, encouraging feedback</span></li>
+        <li><span class="feature-dot">4</span> <span>Speech-to-text reading checks and a spelling &amp; grammar helper</span></li>
+        <li><span class="feature-dot">5</span> <span>Progress tracking with level-based activity recommendations</span></li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <span class="eyebrow">Every learner's path looks different</span>
+      <svg class="growth-path" viewBox="0 0 360 280" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="A winding path of stepping stones representing a learning journey">
+        <path d="M30 250 C 90 250, 60 180, 120 170 S 200 130, 180 90 S 260 60, 250 30"
+              fill="none" stroke="#DDE3D7" stroke-width="10" stroke-linecap="round"/>
+        <circle class="stone reached" cx="30" cy="250" r="14"/>
+        <circle class="stone reached" cx="100" cy="210" r="14"/>
+        <circle class="stone reached" cx="150" cy="150" r="14"/>
+        <circle class="stone" cx="200" cy="105" r="14" fill="#7B6FB0"/>
+        <circle class="stone" cx="250" cy="30" r="16" fill="#3D8B83"/>
+        <text x="250" y="14" text-anchor="middle" font-size="20">🌟</text>
+      </svg>
+      <p class="muted mt-16">
+        Activities and reading levels adjust automatically as a student practices — recommendations
+        always meet them at their current step, then nudge them to the next one.
+      </p>
+    </div>
+  </div>
+</section>
+
+<section class="card-row cols-3 mt-24">
+  <div class="card">
+    <h3>For students</h3>
+    <p class="muted">Register and tell us a bit about how you learn best. Your dashboard, fonts, and
+      activities are personalised from the start.</p>
+  </div>
+  <div class="card">
+    <h3>For parents</h3>
+    <p class="muted">Link to your child's account to see their progress, strengths, and what to
+      practice next — no need to guess.</p>
+  </div>
+  <div class="card">
+    <h3>For teachers</h3>
+    <p class="muted">Track multiple students, spot who needs extra support, and see exactly which
+      skill areas need attention.</p>
+  </div>
+</section>
+{% endblock %}

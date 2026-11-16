@@ -1,0 +1,79 @@
+{% extends "base.html" %}
+{% block title %}{{ student.name }}'s progress{% endblock %}
+
+{% block content %}
+<a href="{{ url_for('guardian_dashboard') }}">&larr; Back to dashboard</a>
+
+<div class="flex justify-between items-center flex-wrap gap-12 mt-16">
+  <div>
+    <span class="eyebrow">{{ profile.difficulty_type|capitalize }}</span>
+    <h1 class="mt-0">{{ student.name }}</h1>
+  </div>
+  <span class="level-badge">Level: {{ profile.reading_level }}</span>
+</div>
+
+<div class="stat-grid mt-16">
+  <div class="stat-card">
+    <div class="stat-label">Reading</div>
+    <div class="stat-value">{{ "%.0f"|format(scores_by_type.reading) ~ "%" if scores_by_type.reading is not none else "—" }}</div>
+  </div>
+  <div class="stat-card">
+    <div class="stat-label">Spelling &amp; grammar</div>
+    <div class="stat-value">{{ "%.0f"|format(scores_by_type.spelling) ~ "%" if scores_by_type.spelling is not none else "—" }}</div>
+  </div>
+  <div class="stat-card">
+    <div class="stat-label">Handwriting</div>
+    <div class="stat-value">{{ "%.0f"|format(scores_by_type.handwriting) ~ "%" if scores_by_type.handwriting is not none else "—" }}</div>
+  </div>
+  <div class="stat-card">
+    <div class="stat-label">Speech</div>
+    <div class="stat-value">{{ "%.0f"|format(scores_by_type.speech) ~ "%" if scores_by_type.speech is not none else "—" }}</div>
+  </div>
+</div>
+
+<div class="card mt-24">
+  <h3 class="mt-0">Progress over time</h3>
+  <canvas id="progress-chart" data-student-id="{{ student.id }}" height="120"></canvas>
+</div>
+
+<div class="card mt-24">
+  <h3 class="mt-0">Suggested focus areas</h3>
+  {% for pick in activity_picks %}
+    <div class="activity-card">
+      <div>
+        <strong>{{ pick.title }}</strong>
+        <p class="muted mb-0" style="font-size:0.9rem;">{{ pick.reason }}</p>
+      </div>
+    </div>
+  {% else %}
+    <p class="muted">No data yet to base suggestions on.</p>
+  {% endfor %}
+</div>
+
+<div class="card mt-24">
+  <h3 class="mt-0">Full activity history</h3>
+  {% if history %}
+    <table class="progress-table">
+      <thead><tr><th>Activity</th><th>Type</th><th>Score</th><th>Notes</th><th>When</th></tr></thead>
+      <tbody>
+        {% for r in history %}
+          <tr>
+            <td>{{ r.activity_title or "—" }}</td>
+            <td>{{ r.activity_type|capitalize }}</td>
+            <td>{{ "%.0f"|format(r.score) }}%</td>
+            <td class="muted" style="font-size:0.85rem;">{{ r.details or "" }}</td>
+            <td>{{ r.created_at.strftime("%b %d, %H:%M") }}</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  {% else %}
+    <p class="muted">No activity recorded yet.</p>
+  {% endif %}
+</div>
+{% endblock %}
+
+{% block extra_scripts %}
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
+<script src="{{ url_for('static', filename='js/dashboard_charts.js') }}"></script>
+{% endblock %}

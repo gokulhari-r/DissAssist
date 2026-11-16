@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% block title %}Profile{% endblock %}
+
+{% block content %}
+<h1>Your profile</h1>
+
+<div class="card" style="max-width:560px;">
+  <form method="POST">
+    <label for="name">Name</label>
+    <input type="text" id="name" name="name" value="{{ current_user.name }}">
+
+    <label>Email</label>
+    <input type="email" value="{{ current_user.email }}" disabled>
+    <p class="form-help">Email can't be changed here in this demo version.</p>
+
+    {% if current_user.is_student %}
+      {% set profile = current_user.student_profile %}
+      <h3>Accessibility settings</h3>
+      <label for="preferred_font">Preferred font</label>
+      <select id="preferred_font" name="preferred_font">
+        <option value="atkinson" {% if profile.preferred_font == 'atkinson' %}selected{% endif %}>Atkinson Hyperlegible (default)</option>
+        <option value="opendyslexic" {% if profile.preferred_font == 'opendyslexic' %}selected{% endif %}>OpenDyslexic</option>
+      </select>
+
+      <label for="font_size">Text size (px)</label>
+      <input type="number" id="font_size" name="font_size" min="14" max="28" value="{{ profile.font_size }}">
+
+      <label for="line_spacing">Line spacing</label>
+      <input type="number" id="line_spacing" name="line_spacing" min="1.2" max="2.4" step="0.1" value="{{ profile.line_spacing }}">
+
+      <h3>Learning profile</h3>
+      <p><strong>Difficulty type:</strong> {{ profile.difficulty_type|capitalize }}</p>
+      <p><strong>Current level:</strong> {{ profile.reading_level|capitalize }}</p>
+      <p class="form-help">Difficulty type can only be changed by contacting support in this demo
+        version, since it affects which tools are shown.</p>
+    {% endif %}
+
+    <button type="submit" class="btn btn-primary btn-block">Save changes</button>
+  </form>
+</div>
+{% endblock %}

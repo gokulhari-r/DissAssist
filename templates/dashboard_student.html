@@ -1,0 +1,103 @@
+{% extends "base.html" %}
+{% block title %}My dashboard{% endblock %}
+
+{% block content %}
+<div class="flex justify-between items-center flex-wrap gap-12">
+  <div>
+    <span class="eyebrow">Hi {{ current_user.name.split(' ')[0] }}!</span>
+    <h1 class="mt-0">Your dashboard</h1>
+  </div>
+  <span class="level-badge">Level: {{ profile.reading_level }}</span>
+</div>
+
+<div class="stat-grid mt-16">
+  <div class="stat-card">
+    <div class="stat-label">Reading</div>
+    <div class="stat-value">{{ "%.0f"|format(scores_by_type.reading) ~ "%" if scores_by_type.reading is not none else "—" }}</div>
+  </div>
+  <div class="stat-card">
+    <div class="stat-label">Spelling &amp; grammar</div>
+    <div class="stat-value">{{ "%.0f"|format(scores_by_type.spelling) ~ "%" if scores_by_type.spelling is not none else "—" }}</div>
+  </div>
+  {% if profile.has_dysgraphia %}
+  <div class="stat-card">
+    <div class="stat-label">Handwriting</div>
+    <div class="stat-value">{{ "%.0f"|format(scores_by_type.handwriting) ~ "%" if scores_by_type.handwriting is not none else "—" }}</div>
+  </div>
+  {% endif %}
+  <div class="stat-card">
+    <div class="stat-label">Speech</div>
+    <div class="stat-value">{{ "%.0f"|format(scores_by_type.speech) ~ "%" if scores_by_type.speech is not none else "—" }}</div>
+  </div>
+</div>
+
+<div class="card-row cols-2 mt-24">
+  <div class="card">
+    <h3 class="mt-0">What to try next</h3>
+    {% if activity_picks %}
+      {% for pick in activity_picks %}
+        <div class="activity-card">
+          <div>
+            <strong>{{ pick.title }}</strong>
+            <p class="muted mb-0" style="font-size:0.9rem;">{{ pick.reason }}</p>
+          </div>
+          <a class="btn btn-primary btn-sm" href="{{ url_for(pick.endpoint) }}">Go</a>
+        </div>
+      {% endfor %}
+    {% else %}
+      <p class="muted">No suggestions yet — try a few activities to get personalised tips!</p>
+    {% endif %}
+  </div>
+
+  <div class="card">
+    <h3 class="mt-0">Recommended reading</h3>
+    {% if reading_picks %}
+      {% for material in reading_picks %}
+        <div class="activity-card">
+          <div>
+            <strong>{{ material.title }}</strong>
+            <p class="muted mb-0" style="font-size:0.9rem;">{{ material.level|capitalize }} · {{ material.topic|capitalize }}</p>
+          </div>
+          <a class="btn btn-outline btn-sm" href="{{ url_for('reading_view', material_id=material.id) }}">Read</a>
+        </div>
+      {% endfor %}
+    {% else %}
+      <p class="muted">No reading material available yet.</p>
+    {% endif %}
+    <a href="{{ url_for('reading') }}" class="btn btn-secondary btn-sm mt-16">Browse all reading</a>
+  </div>
+</div>
+
+<div class="card mt-24">
+  <h3 class="mt-0">Your progress over time</h3>
+  <canvas id="progress-chart" data-student-id="{{ current_user.id }}" height="120"></canvas>
+</div>
+
+<div class="card mt-24">
+  <h3 class="mt-0">Recent activity</h3>
+  {% if recent %}
+    <table class="progress-table">
+      <thead><tr><th>Activity</th><th>Type</th><th>Score</th><th>When</th></tr></thead>
+      <tbody>
+        {% for r in recent %}
+          <tr>
+            <td>{{ r.activity_title or "—" }}</td>
+            <td>{{ r.activity_type|capitalize }}</td>
+            <td>{{ "%.0f"|format(r.score) }}%</td>
+            <td>{{ r.created_at.strftime("%b %d, %H:%M") }}</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  {% else %}
+    <div class="empty-state">
+      <p>You haven't completed any activities yet. Pick something from "What to try next" above to get started!</p>
+    </div>
+  {% endif %}
+</div>
+{% endblock %}
+
+{% block extra_scripts %}
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
+<script src="{{ url_for('static', filename='js/dashboard_charts.js') }}"></script>
+{% endblock %}

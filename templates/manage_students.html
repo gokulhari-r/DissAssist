@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% block title %}Manage students{% endblock %}
+
+{% block content %}
+<h1>Manage students</h1>
+<p class="muted">Link your account to a student so you can see their progress and recommendations.
+  The student needs to have already created their LearnBridge account.</p>
+
+<div class="card" style="max-width:520px;">
+  <h3 class="mt-0">Link a new student</h3>
+  <form method="POST">
+    <label for="student_email">Student's email</label>
+    <input type="email" id="student_email" name="student_email" required placeholder="student@example.com">
+    <button type="submit" class="btn btn-primary btn-block">Link student</button>
+  </form>
+</div>
+
+<div class="card mt-24">
+  <h3 class="mt-0">Linked students</h3>
+  {% if links %}
+    <table class="progress-table">
+      <thead><tr><th>Name</th><th>Email</th><th>Linked on</th><th></th></tr></thead>
+      <tbody>
+        {% for link in links %}
+          <tr>
+            <td>{{ link.student.name }}</td>
+            <td>{{ link.student.email }}</td>
+            <td>{{ link.created_at.strftime("%b %d, %Y") }}</td>
+            <td><a href="{{ url_for('view_student', student_id=link.student.id) }}">View progress</a></td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  {% else %}
+    <p class="muted">No students linked yet.</p>
+  {% endif %}
+</div>
+{% endblock %}

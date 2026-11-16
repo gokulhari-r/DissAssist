@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block title %}{{ material.title }}{% endblock %}
+
+{% block content %}
+<a href="{{ url_for('reading') }}">&larr; Back to reading list</a>
+
+<div class="card mt-16">
+  <span class="tag">{{ material.level|capitalize }}</span>
+  <h1 class="mt-16">{{ material.title }}</h1>
+
+  <div class="reading-toolbar">
+    <button class="btn btn-primary btn-sm" data-tts-target="#passage-text" data-tts-rate="0.85">🔊 Read aloud</button>
+    <button class="btn btn-outline btn-sm" data-tts-stop>⏹ Stop</button>
+    <span class="muted" style="font-size:0.85rem;">Tip: use the ⚙ button (bottom right) to switch to OpenDyslexic font or adjust spacing.</span>
+  </div>
+
+  <p id="passage-text" class="reading-passage">{{ material.content }}</p>
+</div>
+
+<div class="card mt-24">
+  <h3 class="mt-0">How did that feel?</h3>
+  <form method="POST" action="{{ url_for('reading_complete', material_id=material.id) }}">
+    <div class="radio-card-group cols-3">
+      <label class="radio-card"><input type="radio" name="rating" value="easy"> 😄 Easy</label>
+      <label class="radio-card"><input type="radio" name="rating" value="ok" checked> 🙂 Okay</label>
+      <label class="radio-card"><input type="radio" name="rating" value="hard"> 😅 Hard</label>
+    </div>
+    <button type="submit" class="btn btn-primary">Save my progress</button>
+  </form>
+</div>
+{% endblock %}
+
+{% block extra_scripts %}
+<script src="{{ url_for('static', filename='js/tts.js') }}"></script>
+{% endblock %}

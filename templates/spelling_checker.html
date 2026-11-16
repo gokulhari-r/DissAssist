@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% block title %}Spelling &amp; grammar{% endblock %}
+
+{% block content %}
+<h1>Spelling &amp; grammar checker</h1>
+
+<div class="card">
+  <h3 class="mt-0">Check my writing</h3>
+  <p class="muted">Paste or type any sentence or paragraph below and we'll look for spelling and
+    grammar issues.</p>
+  <textarea id="check-text-input" rows="6" placeholder="Write something here…"></textarea>
+  <button id="check-text-btn" class="btn btn-primary">Check my writing</button>
+  <div id="check-results" class="mt-16"></div>
+</div>
+
+<div class="card mt-24">
+  <h3 class="mt-0">Listen &amp; spell practice</h3>
+  <p class="muted">Tap the speaker to hear each word, then type what you heard.</p>
+
+  <form id="spelling-practice-form">
+    <div class="card-row cols-2">
+      {% for word in practice_words %}
+        <div class="flex items-center gap-12 mt-16">
+          <button type="button" class="btn btn-outline btn-sm" data-tts-word="{{ word }}">🔊</button>
+          <input type="text" data-target-word="{{ word }}" placeholder="Type the word…" autocomplete="off">
+        </div>
+      {% endfor %}
+    </div>
+  </form>
+  <button id="spelling-practice-submit" class="btn btn-primary mt-16">Check my spelling</button>
+  <div id="spelling-practice-result" class="mt-16"></div>
+</div>
+{% endblock %}
+
+{% block extra_scripts %}
+<script src="{{ url_for('static', filename='js/tts.js') }}"></script>
+<script src="{{ url_for('static', filename='js/spelling.js') }}"></script>
+{% endblock %}

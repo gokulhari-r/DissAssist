@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% block title %}Speech practice{% endblock %}
+
+{% block content %}
+<h1>Speech-to-text practice</h1>
+<p class="muted">Read the sentence below out loud. We'll listen and show you how closely your
+  speech matched the words.</p>
+
+<div class="card-row cols-2">
+  <div class="card text-center">
+    <span class="eyebrow">Read this aloud</span>
+    <p class="target-word-display" style="font-size:1.6rem;">"{{ target_sentence }}"</p>
+    <button class="btn btn-outline btn-sm" data-tts-word="{{ target_sentence }}">🔊 Hear it first</button>
+
+    <div class="mt-24">
+      <button id="mic-btn" class="mic-button" data-target-sentence="{{ target_sentence }}" aria-label="Start recording">🎤</button>
+    </div>
+    <p id="speech-status" class="muted mt-16">Tap the microphone, then read the sentence aloud.</p>
+
+    <div class="card mt-16" style="background:var(--color-surface-alt); text-align:left;">
+      <strong>What we heard:</strong>
+      <p id="transcript-box" class="mb-0">—</p>
+    </div>
+
+    <button id="speech-submit-btn" class="btn btn-primary mt-16" disabled>Check my reading</button>
+    <div id="speech-result" class="mt-16"></div>
+  </div>
+
+  <div class="card">
+    <h3 class="mt-0">Try another sentence</h3>
+    <div class="flex flex-wrap gap-8">
+      {% for sentence in sentences %}
+        <a class="btn btn-outline btn-sm" href="{{ url_for('speech_practice', sentence=sentence) }}">{{ sentence[:28] }}{{ "…" if sentence|length > 28 else "" }}</a>
+      {% endfor %}
+    </div>
+    <p class="muted mt-24" style="font-size:0.9rem;">
+      Speech recognition uses your browser's built-in microphone support (works best in Chrome or
+      Edge). Your audio is processed by the browser and never uploaded anywhere — only the final
+      transcript is sent to LearnBridge for scoring.
+    </p>
+  </div>
+</div>
+{% endblock %}
+
+{% block extra_scripts %}
+<script src="{{ url_for('static', filename='js/tts.js') }}"></script>
+<script src="{{ url_for('static', filename='js/stt.js') }}"></script>
+{% endblock %}

@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+{% block title %}Handwriting practice{% endblock %}
+
+{% block content %}
+<h1>Handwriting practice</h1>
+<p class="muted">Write the word below in the box using your mouse, finger, or stylus. When you're
+  done, tap "Check my writing" for feedback.</p>
+
+<div class="card-row cols-2">
+  <div class="card text-center">
+    <span class="eyebrow">Write this</span>
+    <p class="target-word-display">{{ target_word }}</p>
+    <button class="btn btn-outline btn-sm" data-tts-word="{{ target_word }}">🔊 Hear it</button>
+
+    <div class="canvas-wrap mt-16">
+      <canvas id="handwriting-canvas" width="480" height="300" data-target-word="{{ target_word }}"></canvas>
+    </div>
+
+    <div class="flex gap-12 justify-between mt-16">
+      <button id="clear-canvas-btn" class="btn btn-outline">Clear</button>
+      <button id="submit-handwriting-btn" class="btn btn-primary">Check my writing</button>
+    </div>
+
+    <div id="handwriting-feedback" class="feedback-box" style="display:none;"></div>
+  </div>
+
+  <div class="card">
+    <h3 class="mt-0">Try another word</h3>
+    <div class="flex flex-wrap gap-8">
+      {% for word in words %}
+        <a class="btn btn-outline btn-sm" href="{{ url_for('handwriting', word=word) }}">{{ word }}</a>
+      {% endfor %}
+    </div>
+    <p class="muted mt-24" style="font-size:0.9rem;">
+      Feedback looks at letter size, spacing, and stroke clarity. If your computer has the optional
+      Tesseract OCR engine installed, you'll also get feedback on whether your writing was readable
+      as the target word.
+    </p>
+  </div>
+</div>
+{% endblock %}
+
+{% block extra_scripts %}
+<script src="{{ url_for('static', filename='js/tts.js') }}"></script>
+<script src="{{ url_for('static', filename='js/handwriting.js') }}"></script>
+<script>
+  document.getElementById('handwriting-feedback').style.display = 'none';
+  document.addEventListener('DOMContentLoaded', function () {
+    const original = document.getElementById('submit-handwriting-btn');
+    if (original) {
+      original.addEventListener('click', function () {
+        setTimeout(function () {
+          document.getElementById('handwriting-feedback').style.display = 'block';
+        }, 50);
+      });
+    }
+  });
+</script>
+{% endblock %}

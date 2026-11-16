@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% block title %}Reading practice{% endblock %}
+
+{% block content %}
+<h1>Reading practice</h1>
+<p class="muted">Pick a passage to read. You can listen to it read aloud, change the font, and tell
+  us how it went when you're done.</p>
+
+{% if picks %}
+<div class="card">
+  <h3 class="mt-0">Recommended for you</h3>
+  <div class="card-row cols-3">
+    {% for material in picks %}
+      <div class="activity-card" style="flex-direction:column; align-items:flex-start;">
+        <strong>{{ material.title }}</strong>
+        <span class="tag mt-16">{{ material.level|capitalize }}</span>
+        <a class="btn btn-primary btn-sm mt-16" href="{{ url_for('reading_view', material_id=material.id) }}">Read this</a>
+      </div>
+    {% endfor %}
+  </div>
+</div>
+{% endif %}
+
+<div class="card mt-24">
+  <div class="flex justify-between items-center flex-wrap gap-12">
+    <h3 class="mt-0 mb-0">Browse all passages</h3>
+    <div class="flex gap-8">
+      {% for level in ["beginner", "intermediate", "advanced"] %}
+        <a class="btn btn-sm {{ 'btn-primary' if level == level_filter else 'btn-outline' }}"
+           href="{{ url_for('reading', level=level) }}">{{ level|capitalize }}</a>
+      {% endfor %}
+    </div>
+  </div>
+
+  {% if materials %}
+    {% for material in materials %}
+      <div class="activity-card">
+        <div>
+          <strong>{{ material.title }}</strong>
+          <p class="muted mb-0" style="font-size:0.9rem;">{{ material.topic|capitalize }}</p>
+        </div>
+        <a class="btn btn-outline btn-sm" href="{{ url_for('reading_view', material_id=material.id) }}">Read</a>
+      </div>
+    {% endfor %}
+  {% else %}
+    <p class="muted">No passages at this level yet.</p>
+  {% endif %}
+</div>
+{% endblock %}
